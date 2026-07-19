@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vocabulary Quiz</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="quiz-body">
+  <div class="container quiz-container">
+    <div id="registration" class="card centered">
+      <h1>📖 Vocabulary Quiz</h1>
+      <input type="text" id="student-name" placeholder="Enter your name to start" autofocus>
+      <button id="start-btn" class="btn">Start Quiz</button>
+    </div>
+
+    <div id="quiz-area" style="display:none;">
+      <div id="step1" class="card step">
+        <p class="word-prompt">What is the definition of <strong id="current-word"></strong>?</p>
+        <div id="choices" class="choices-grid"></div>
+        <div id="step1-feedback" class="feedback"></div>
+      </div>
+      <div id="step2" class="card step" style="display:none;">
+        <h2 id="review-word"></h2>
+        <p id="review-def"></p>
+        <ul id="review-sentences"></ul>
+        <button id="next-to-step3" class="btn">Continue</button>
+      </div>
+      <div id="step3" class="card step" style="display:none;">
+        <p id="fill-sentence"></p>
+        <input type="text" id="fill-input" placeholder="Type the word">
+        <button id="submit-fill" class="btn">Submit</button>
+        <div id="step3-feedback" class="feedback"></div>
+      </div>
+      <div id="quiz-progress" class="progress">Word 1 / 0</div>
+    </div>
+
+    <div id="quiz-complete" class="card centered" style="display:none;">
+      <h2>Quiz Complete!</h2>
+      <p>Accuracy: <span id="final-accuracy"></span>%</p>
+      <button onclick="location.reload()" class="btn">Take Another Quiz</button>
+    </div>
+  </div>
+  <script src="/js/quiz.js"></script>
+</body>
+</html>

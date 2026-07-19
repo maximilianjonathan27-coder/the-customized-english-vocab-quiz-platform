@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Portal</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body class="teacher-body">
+  <div class="container">
+    <h1 class="logo">📚 Teacher Portal</h1>
+    <div class="tabs">
+      <button class="tab active" data-tab="bank">Question Bank</button>
+      <button class="tab" data-tab="students">Student Overview</button>
+      <button class="tab" data-tab="report">Parent Report</button>
+      <button class="tab" data-tab="settings">Settings</button>
+    </div>
+
+    <!-- Tab: Question Bank -->
+    <section id="tab-bank" class="tab-content active">
+      <div class="card">
+        <h2>Manual Add</h2>
+        <form id="manual-form" class="grid-form">
+          <input type="text" id="m-word" placeholder="Word" required>
+          <input type="text" id="m-def" placeholder="Definition" required>
+          <input type="text" id="m-distractors" placeholder="3 distractors, comma separated" required>
+          <textarea id="m-sentences" placeholder="2-3 example sentences, each on new line" required></textarea>
+          <input type="text" id="m-fillblank" placeholder="Fill-in-blank sentence with ______" required>
+          <button type="submit" class="btn">Add Word</button>
+        </form>
+      </div>
+      <div class="card">
+        <h2>Bulk AI Generate</h2>
+        <textarea id="word-list" placeholder="Paste word list, one per line or comma separated"></textarea>
+        <button id="bulk-gen-btn" class="btn">Generate & Save</button>
+        <div id="gen-status" class="status"></div>
+      </div>
+      <div class="card">
+        <h2>Current Word Bank</h2>
+        <ul id="word-bank-list" class="list"></ul>
+      </div>
+    </section>
+
+    <!-- Tab: Student Overview -->
+    <section id="tab-students" class="tab-content">
+      <div class="card">
+        <h2>All Students</h2>
+        <table id="students-table">
+          <thead><tr><th>Name</th><th>Accuracy</th><th>Time (min)</th><th>Quizzes</th><th>Mastered</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Tab: Parent Report -->
+    <section id="tab-report" class="tab-content">
+      <div class="card">
+        <h2>Select Student</h2>
+        <select id="student-select"><option value="">-- Choose --</option></select>
+        <button id="gen-report-btn" class="btn">Generate Report</button>
+      </div>
+      <div id="report-container" class="report-card" style="display:none;">
+        <!-- Report content filled by JS -->
+        <div class="report-header">
+          <h2 id="report-name"></h2>
+          <div class="metric-cards" id="metric-cards"></div>
+        </div>
+        <div class="charts-row">
+          <div class="chart-box"><canvas id="trendChart"></canvas></div>
+          <div class="chart-box"><canvas id="pieChart"></canvas></div>
+        </div>
+        <div class="chart-box"><canvas id="masteryBarChart"></canvas></div>
+        <div class="advice-box" id="advice-box"></div>
+        <div class="report-actions">
+          <button id="export-pdf" class="btn">Export PDF</button>
+          <button id="copy-link" class="btn">Copy Share Link</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab: Settings -->
+    <section id="tab-settings" class="tab-content">
+      <div class="card">
+        <h2>API Configuration</h2>
+        <label>LLM API Key</label>
+        <input type="text" id="api-key-input" placeholder="sk-...">
+        <button id="save-settings" class="btn">Save</button>
+        <p>Generation calls: <span id="gen-count">0</span></p>
+      </div>
+    </section>
+  </div>
+
+  <script src="/js/teacher.js"></script>
+</body>
+</html>
